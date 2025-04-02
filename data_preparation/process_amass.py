@@ -206,7 +206,7 @@ def _hdf5_step(motion_file, motion_name_mapper, num_workers=0, output_dir=OUTPUT
             # "multi_thread": True,
             "smpl_type": "smpl",
             "randomrize_heading": randomize_heading,
-            "data_dir": "data_preparation/AMASS/models",
+            "data_dir": "AMASS/models",
         }
     )
     data = joblib.load(motion_lib_cfg.motion_file)

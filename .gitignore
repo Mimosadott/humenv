@@ -15,5 +15,9 @@ __pycache__
 *.npz
 *.hdf5
 humenv.egg-info/
-data_preparation/AMASS/*
-data_preparation/goal_poses/*
+data_preparation/AMASS
+data_preparation/goal_poses
+data_preparation/humenv_amass
+data_preparation/PHC
+data_preparation/SMPLSim
+data_preparation/test_train_split

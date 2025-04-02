@@ -1,46 +1,44 @@
 
-
 <div id="user-content-toc">
   <ul align="center" style="list-style: none;">
     <summary>
-      <h1> HumEnv: Humanoid Environment for Reinforcement Learning</h1>
+      <h1> HumEnv：用于强化学习的人形环境</h1>
     </summary>
   </ul>
 </div>
 
-# Overview
+# 概述
 
-HumEnv is an environment based on SMPL humanoid which aims for reproducible studies of humanoid control. It is designed to facilitate algorithmic research on reinforcement learning (RL), goal-based RL, unsupervised RL, and imitation learning. It consists of a basic environment interface, as well as an optional benchmark to evaluate agents on different tasks.
+HumEnv是一个基于SMPL人形模型的环境，旨在实现人形控制的可复现研究。它专为促进强化学习（RL）、基于目标的RL、无监督RL和模仿学习的算法研究而设计。该环境包含基础环境接口，以及一个可选的基准测试模块，用于评估不同任务上的智能体表现。
 
-## Features
+## 核心特性
 
- * An environment that enables simulation of a realistic humanoid on a range of proprioceptive tasks
- * A MuJoCo-based humanoid robot definition tuned for more realistic behaviors (friction, joint actuation, and movement range) 
- * 9 configurable reward classes to enable learning basic humanoid skills, including locomotion, spinning, jumping, crawling, and more
- * Benchmarking code to evaluate RL agents on three classes of tasks: reward-based, goal-reaching and motion tracking
- * Various initialisation options: a static "T-pose", random fall, frame from MoCap data, and their combinations
- * Full compatibility with Gymnasium 
+ * 支持在多种本体感觉任务中模拟真实人形的环境
+ * 基于MuJoCo的人形机器人定义，优化了摩擦系数、关节驱动和运动范围等参数以实现更真实的行为
+ * 9种可配置的奖励类别，支持学习基本人形技能（包括行走、旋转、跳跃、爬行等）
+ * 基准测试代码，可评估三类任务的RL智能体：基于奖励、目标达成和动作追踪
+ * 多样化初始化选项：静态"T字姿势"、随机跌倒、动作捕捉数据帧及其组合
+ * 与Gymnasium完全兼容
 
-# Installation
+# 安装指南
 
-Basic installation with full support of the environment functionalities (it requires Python 3.9+):
+完整功能支持的基础安装（需Python 3.9+）：
 
 ```bash
 pip install "git+https://github.com/facebookresearch/HumEnv.git"
 ```
 
-To use the MoCap and MoCapAndFall initalization schemes, you must prepare licensed datasets according to [these instructions](data_preparation/README.md).
+若要使用动作捕捉（MoCap）和动作捕捉+跌倒初始化方案，需根据[数据准备说明](data_preparation/README.md)准备授权数据集。
 
-Full installation that includes all the benchmarking features:
+包含所有基准测试功能的完整安装：
 
 ```bash
 pip install "humenv[bench] @ git+https://github.com/facebookresearch/HumEnv.git"
 ```
 
-# Quickstart
+# 快速入门
 
-Once installed, you can create an environment using `humenv.make_humenv` which has a similar interface as `gymnasium.make_vec`.
-Here is a simple example:
+安装完成后，可使用与`gymnasium.make_vec`接口相似的`humenv.make_humenv`创建环境。示例代码如下：
 
 ```python
 from humenv import make_humenv
@@ -50,28 +48,28 @@ frames = [env.render()]
 for i in range(60):
     observation, reward, terminated, truncated, info = env.step(env.action_space.sample())
     frames.append(env.render())
-# render frames at 30fps
+# 以30帧/秒渲染画面
 ```
 
-More examples are available in the [tutorial](tutorial.ipynb).
+更多示例请参考[tutorial.ipynb](tutorial.ipynb)。
 
-# Citation
+# 引用格式
 ```
 @article{tirinzoni2024metamotivo,
-  title={Zero-shot Whole-Body Humanoid Control via Behavioral Foundation Models},
-  author={Tirinzoni, Andrea and Touati, Ahmed and Farebrother, Jesse and Guzek, Mateusz and Kanervisto, Anssi and Xu, Yingchen and Lazaric, Alessandro and Pirotta, Matteo},
+  title={通过行为基础模型实现零样本全身人形控制},
+  author={Tirinzoni, Andrea 和 Touati, Ahmed 和 Farebrother, Jesse 和 Guzek, Mateusz 和 Kanervisto, Anssi 和 Xu, Yingchen 和 Lazaric, Alessandro 和 Pirotta, Matteo},
 }
 ```
 
-# Acknowledgments
+# 致谢
 
- * [SMPL](https://smpl.is.tue.mpg.de/) and [AMASS](https://amass.is.tue.mpg.de/) for the humanoid skeleton and motions used to initialise realistic positions for the tracking benchmark
- * [PHC](https://github.com/ZhengyiLuo/PHC) for the data process and calculation of some Goal-reaching metrics
- * [SMPLSm](https://github.com/ZhengyiLuo/SMPLSim) for scripts used to process SMPL and AMASS datasets, and for humanoid processing utils
- * [smplx](https://github.com/vchoutas/smplx.git) for removing chumpy dependency
- * [MuJoCo](https://github.com/google-deepmind/mujoco) for the backend simulation engine
- * [Gymnasium](https://github.com/Farama-Foundation/Gymnasium) for the API 
+ * [SMPL](https://smpl.is.tue.mpg.de/)和[AMASS](https://amass.is.tue.mpg.de/)提供人形骨架和动作数据用于初始化追踪基准
+ * [PHC](https://github.com/ZhengyiLuo/PHC)用于数据处理和目标达成任务的部分指标计算
+ * [SMPLSm](https://github.com/ZhengyiLuo/SMPLSim)提供SMPL/AMASS数据集处理脚本及人形处理工具
+ * [smplx](https://github.com/vchoutas/smplx.git)帮助移除chumpy依赖
+ * [MuJoCo](https://github.com/google-deepmind/mujoco)作为后端仿真引擎
+ * [Gymnasium](https://github.com/Farama-Foundation/Gymnasium)提供API支持
 
-# License
+# 许可协议
 
-Humenv is licensed under the CC BY-NC 4.0 license. See [LICENSE](LICENSE) for details.
+HumEnv采用CC BY-NC 4.0许可协议。详细条款请见[LICENSE](LICENSE)。
